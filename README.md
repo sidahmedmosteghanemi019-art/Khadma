@@ -1,56 +1,74 @@
-# Welcome to your Expo app 👋
+# HandyHub
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A neighbourhood services marketplace connecting local clients with skilled workers — plumbers, cleaners, electricians and more. Built as a cross-platform mobile app (Android, iOS and web) with a live deployed version.
 
-## Get started
+**Live demo:** https://handyhub-mobile.vercel.app
 
-1. Install dependencies
+## Tech stack
+
+- [Expo](https://expo.dev) (SDK 57) + [Expo Router](https://docs.expo.dev/router/introduction/) — file-based routing across native and web
+- [React Native](https://reactnative.dev) + [NativeWind](https://www.nativewind.dev) (Tailwind CSS styling)
+- [Supabase](https://supabase.com) — authentication, Postgres database with Row Level Security, realtime chat
+- [Vercel](https://vercel.com) — web hosting and CI/CD
+
+## Features
+
+- Email/password sign-up and login via Supabase Auth, with persistent sessions
+- Client and worker roles selected at sign-up
+- Service categories and worker profiles
+- **Real job requests** — clients submit service requests that are stored in Postgres
+- Workers see open requests and can accept them (moves from *Requested* to *Ongoing*)
+- Realtime one-on-one chat between users (Supabase realtime subscriptions)
+- Notifications per user, marked read when viewed
+- Profile management and settings
+
+## Project structure
+
+```
+src/
+  app/          # Expo Router screens (file-based routing)
+  components/   # Reusable UI components
+  lib/          # Supabase client, helpers, static demo data
+  constants/    # Theme colours
+supabase/
+  schema.sql    # Database schema — tables + RLS policies
+```
+
+## Running locally
+
+1. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Create a `.env` file in the project root:
+
+   ```bash
+   EXPO_PUBLIC_SUPABASE_URL=your-project-url
+   EXPO_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+   ```
+
+3. Create the database schema by running [`supabase/schema.sql`](supabase/schema.sql) in the Supabase SQL Editor.
+
+4. Start the app:
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   Scan the QR code with [Expo Go](https://expo.dev/go), or press `w` to open the web version.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Deployment
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+The web version is deployed on Vercel. Build config lives in `vercel.json`; environment variables (`EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_ANON_KEY`) are set in the Vercel project settings. Deploying manually:
 
 ```bash
-npm run reset-project
+npx vercel --prod
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Known limitations
 
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- The workers/ratings shown on the Home tab are seeded demo data; job requests, chats and notifications are fully backed by the database.
+- Payment methods and saved addresses are placeholder screens.
+- Photo upload on the request form is not implemented yet.
