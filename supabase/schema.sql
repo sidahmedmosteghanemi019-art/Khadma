@@ -104,6 +104,35 @@ create policy "notifications_insert_own" on public.notifications
 create policy "notifications_update_own" on public.notifications
   for update using (auth.uid() = user_id) with check (auth.uid() = user_id);
 
+-- ---------- job requests ----------
+create table if not exists public.job_requests (
+  id uuid primary key default gen_random_uuid(),
+  client_id uuid not null references public.profiles (id) on delete cascade,
+  category text not null default '',
+  description text not null default '',
+  preferred_date text not null default '',
+  preferred_time text not null default '',
+  budget text not null default '',
+  status text not null default 'requested' check (status in ('requested', 'ongoing', 'completed')),
+  created_at timestamptz not null default now()
+);
+
+create index if not exists job_requests_client_idx on public.job_requests (client_id, created_at);
+
+alter table public.job_requests enable row level security;
+
+create policy "job_requests_select" on public.job_requests
+  for select using (
+    client_id = auth.uid()
+    or (auth.uid() is not null and status = 'requested')
+  );
+
+create policy "job_requests_insert_own" on public.job_requests
+  for insert with check (client_id = auth.uid());
+
+create policy "job_requests_update_authed" on public.job_requests
+  for update using (auth.uid() is not null) with check (auth.uid() is not null);
+
 -- ---------- realtime ----------
 alter publication supabase_realtime add table public.messages;
 alter publication supabase_realtime add table public.conversations;

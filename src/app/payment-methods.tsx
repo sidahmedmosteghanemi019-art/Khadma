@@ -1,5 +1,6 @@
 import { Plus } from 'lucide-react-native';
-import { Alert, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+import { showAlert } from '@/lib/alert';
 
 import { ScreenHeader } from '@/components/handyhub/screen-header';
 
@@ -29,9 +30,9 @@ export default function PaymentMethods() {
           ))}
         </View>
         <Pressable
-          onPress={() => Alert.alert('Card form coming soon')}
+          onPress={() => showAlert('Card form coming soon')}
           className="mt-5 flex-row items-center justify-center gap-2 rounded-xl border border-dashed border-border py-3.5">
-          <Plus size={16} color="#208AEF" />
+          <Plus size={16} color="#1B3B2E" />
           <Text className="text-sm font-medium text-primary">Add a card</Text>
         </Pressable>
       </View>

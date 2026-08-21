@@ -26,7 +26,7 @@ export function ScreenHeader({ title, back, right, onDark }: ScreenHeaderProps) 
           onPress={() => (router.canGoBack() ? router.back() : router.push(back))}
           className="h-10 w-10 items-center justify-center rounded-full"
           hitSlop={8}>
-          <ChevronLeft size={22} color={onDark ? '#FFFFFF' : '#09090B'} />
+          <ChevronLeft size={22} color={onDark ? '#FFFFFF' : '#1B3B2E'} />
         </Pressable>
       ) : (
         <View className="h-10 w-10" />

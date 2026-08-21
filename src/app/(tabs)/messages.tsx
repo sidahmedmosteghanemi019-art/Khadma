@@ -86,20 +86,20 @@ export default function Messages() {
         back="/home"
         right={
           <Link href="/new-chat" asChild>
-            <Pressable className="h-10 w-10 items-center justify-center rounded-full" hitSlop={8}>
-              <MessageSquarePlus size={20} color="#208AEF" />
+            <Pressable className="h-10 w-10 items-center justify-center rounded-full bg-brand-forest" hitSlop={8}>
+              <MessageSquarePlus size={18} color="#8CB84A" />
             </Pressable>
           </Link>
         }
       />
       {!loaded ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#208AEF" />
+          <ActivityIndicator color="#1B3B2E" />
         </View>
       ) : items.length === 0 ? (
         <View className="flex-1 items-center justify-center px-10">
-          <View className="h-16 w-16 items-center justify-center rounded-2xl bg-card">
-            <MessagesSquare size={28} color="#71717A" />
+          <View className="h-16 w-16 items-center justify-center rounded-full bg-brand-forest">
+            <MessagesSquare size={26} color="#8CB84A" />
           </View>
           <Text className="mt-4 text-base font-semibold">No chats yet</Text>
           <Text className="mt-1 text-center text-sm text-muted-foreground">

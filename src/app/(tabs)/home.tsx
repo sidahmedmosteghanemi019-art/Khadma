@@ -1,10 +1,12 @@
 import { Link } from "expo-router";
 import { Bell, MapPin, Search, Wrench } from "lucide-react-native";
 import { useEffect, useState } from "react";
-import { Alert, Pressable, ScrollView, Switch, Text, View } from "react-native";
+import { Pressable, ScrollView, Switch, Text, View } from "react-native";
+import { showAlert } from '@/lib/alert';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { categoryIcons } from "@/components/handyhub/category-icons";
+import { IconCircle } from "@/components/handyhub/icon-circle";
 import { Stars } from "@/components/handyhub/stars";
 import { categories, jobs, workers } from "@/lib/handyhub-data";
 import type { JobStatus } from "@/lib/handyhub-data";
@@ -32,7 +34,7 @@ function ClientHome({ name, location }: { name: string; location: string }) {
           <View>
             {location ? (
               <View className="flex-row items-center gap-1">
-                <MapPin size={14} color="#71717A" />
+                <MapPin size={14} color="#5F6B62" />
                 <Text className="text-xs text-muted-foreground">{location}</Text>
               </View>
             ) : null}
@@ -41,7 +43,7 @@ function ClientHome({ name, location }: { name: string; location: string }) {
           </View>
           <Link href="/notifications" asChild>
             <Pressable className="relative h-10 w-10 items-center justify-center rounded-full bg-card">
-              <Bell size={20} color="#09090B" />
+              <Bell size={20} color="#1B3B2E" />
               <View className="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary" />
             </Pressable>
           </Link>
@@ -49,7 +51,7 @@ function ClientHome({ name, location }: { name: string; location: string }) {
 
         <Link href="/categories" asChild>
           <Pressable className="mt-4 flex-row items-center gap-2 rounded-xl bg-card px-4 py-3">
-            <Search size={16} color="#71717A" />
+            <Search size={16} color="#5F6B62" />
             <Text className="text-sm text-muted-foreground">Search for a service…</Text>
           </Pressable>
         </Link>
@@ -71,7 +73,7 @@ function ClientHome({ name, location }: { name: string; location: string }) {
               return (
                 <Link key={c.slug} href={`/service/${c.slug}`} asChild>
                   <Pressable className="mb-3 w-[22%] items-center gap-2 rounded-2xl bg-card px-1 py-3">
-                    <Icon size={20} color="#208AEF" />
+                    <IconCircle icon={Icon} size={18} circle={36} />
                     <Text className="text-center text-[11px] font-medium">{c.name}</Text>
                   </Pressable>
                 </Link>
@@ -150,7 +152,7 @@ function WorkerHome({ name, location, specialty }: { name: string; location: str
           <View>
             {location ? (
               <View className="flex-row items-center gap-1">
-                <MapPin size={14} color="#71717A" />
+                <MapPin size={14} color="#5F6B62" />
                 <Text className="text-xs text-muted-foreground">{location}</Text>
               </View>
             ) : null}
@@ -160,14 +162,14 @@ function WorkerHome({ name, location, specialty }: { name: string; location: str
             </Text>
             {specialtyName ? (
               <View className="mt-1 flex-row items-center gap-1.5">
-                <Wrench size={14} color="#208AEF" />
+                <Wrench size={14} color="#1B3B2E" />
                 <Text className="text-xs font-semibold text-primary">{specialtyName}</Text>
               </View>
             ) : null}
           </View>
           <Link href="/notifications" asChild>
             <Pressable className="relative h-10 w-10 items-center justify-center rounded-full bg-card">
-              <Bell size={20} color="#09090B" />
+              <Bell size={20} color="#1B3B2E" />
               <View className="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary" />
             </Pressable>
           </Link>
@@ -185,7 +187,7 @@ function WorkerHome({ name, location, specialty }: { name: string; location: str
           <Switch
             value={available}
             onValueChange={setAvailable}
-            trackColor={{ true: "#208AEF", false: "#E4E4E7" }}
+            trackColor={{ true: "#1B3B2E", false: "#DDDDD2" }}
             thumbColor="#FFFFFF"
           />
         </View>
@@ -227,7 +229,7 @@ function WorkerHome({ name, location, specialty }: { name: string; location: str
             {j.status === "requested" ? (
               <Pressable
                 onPress={() =>
-                  Alert.alert("Job accepted", `${j.service} has been added to your active jobs.`)
+                  showAlert("Job accepted", `${j.service} has been added to your active jobs.`)
                 }
                 className="mt-3 self-start rounded-lg bg-primary px-4 py-2">
                 <Text className="text-xs font-semibold text-primary-foreground">Accept job</Text>

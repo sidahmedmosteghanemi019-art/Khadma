@@ -15,8 +15,8 @@ export function Stars({ value, className, size = 12 }: StarsProps) {
         <Star
           key={i}
           size={size}
-          color={i < filled ? '#F5A623' : '#D4D4D8'}
-          fill={i < filled ? '#F5A623' : 'none'}
+          color={i < filled ? '#E0722F' : '#DDDDD2'}
+          fill={i < filled ? '#E0722F' : 'none'}
         />
       ))}
     </View>

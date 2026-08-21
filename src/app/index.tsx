@@ -18,9 +18,9 @@ export default function Splash() {
     <View className="flex-1 bg-brand-deep">
       <View className="flex-1 items-center justify-center gap-6 px-8">
         <View className="relative h-24 w-24 items-center justify-center rounded-3xl bg-primary-foreground/10">
-          <House size={48} strokeWidth={1.5} color="#A3E635" />
+          <House size={48} strokeWidth={1.5} color="#8CB84A" />
           <View className="absolute -right-1 -top-1">
-            <Leaf size={28} color="#A3E635" />
+            <Leaf size={28} color="#8CB84A" />
           </View>
         </View>
         <View className="items-center">

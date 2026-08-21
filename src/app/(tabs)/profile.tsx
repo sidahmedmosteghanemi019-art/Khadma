@@ -13,6 +13,7 @@ import type { LucideIcon } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 
+import { IconCircle } from '@/components/handyhub/icon-circle';
 import { ScreenHeader } from '@/components/handyhub/screen-header';
 import { categories, jobs } from '@/lib/handyhub-data';
 import type { UserRole } from '@/lib/store';
@@ -94,7 +95,7 @@ export default function Profile() {
 
         {role === 'worker' && specialtyName ? (
           <View className="mt-4 flex-row items-center gap-2 rounded-xl bg-accent/50 px-4 py-3">
-            <Wrench size={16} color="#1D4ED8" />
+            <Wrench size={16} color="#1B3B2E" />
             <Text className="text-sm font-medium text-accent-foreground">
               Specialises in {specialtyName}
             </Text>
@@ -105,9 +106,9 @@ export default function Profile() {
           {rows.map(({ icon: Icon, label, to }) => (
             <Link key={label} href={to} asChild>
               <Pressable className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-                <Icon size={16} color="#208AEF" />
+                <IconCircle icon={Icon} />
                 <Text className="flex-1 text-sm font-medium">{label}</Text>
-                <ChevronRight size={16} color="#71717A" />
+                <ChevronRight size={16} color="#5F6B62" />
               </Pressable>
             </Link>
           ))}

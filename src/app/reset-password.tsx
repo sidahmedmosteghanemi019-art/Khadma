@@ -16,7 +16,7 @@ export default function ResetPassword() {
               secureTextEntry
               autoComplete="new-password"
               placeholder="New password"
-              placeholderTextColor="#71717A"
+              placeholderTextColor="#5F6B62"
               className="w-full rounded-xl bg-card px-4 py-3.5 text-sm"
             />
           </View>
@@ -26,7 +26,7 @@ export default function ResetPassword() {
               secureTextEntry
               autoComplete="new-password"
               placeholder="Confirm new password"
-              placeholderTextColor="#71717A"
+              placeholderTextColor="#5F6B62"
               className="w-full rounded-xl bg-card px-4 py-3.5 text-sm"
             />
           </View>

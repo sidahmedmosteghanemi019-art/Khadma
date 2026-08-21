@@ -1,7 +1,8 @@
 import { useLocalSearchParams } from 'expo-router';
 import { Send } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { showAlert } from '@/lib/alert';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 
@@ -109,7 +110,7 @@ export default function Chat() {
       text: draft.trim(),
     });
     if (error) {
-      Alert.alert('Could not send', error.message);
+      showAlert('Could not send', error.message);
       return;
     }
     setDraft('');
@@ -118,7 +119,7 @@ export default function Chat() {
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center bg-background">
-        <ActivityIndicator color="#208AEF" />
+        <ActivityIndicator color="#1B3B2E" />
       </View>
     );
   }
@@ -180,7 +181,7 @@ export default function Chat() {
           value={draft}
           onChangeText={setDraft}
           placeholder="Type a message\u2026"
-          placeholderTextColor="#71717A"
+          placeholderTextColor="#5F6B62"
           className="flex-1 rounded-full bg-card px-4 py-3 text-sm"
         />
         <Pressable

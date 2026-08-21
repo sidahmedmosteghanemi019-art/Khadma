@@ -5,6 +5,7 @@ import { Pressable, Text, TextInput, View } from 'react-native';
 
 import { ScreenHeader } from '@/components/handyhub/screen-header';
 import { categoryIcons } from '@/components/handyhub/category-icons';
+import { IconCircle } from '@/components/handyhub/icon-circle';
 import { categories } from '@/lib/handyhub-data';
 
 export default function Categories() {
@@ -15,12 +16,12 @@ export default function Categories() {
       <ScreenHeader title="All categories" back="/home" />
       <View className="flex-1 px-5 py-5">
         <View className="flex-row items-center gap-2 rounded-xl bg-card px-4 py-3">
-          <Search size={16} color="#71717A" />
+          <Search size={16} color="#5F6B62" />
           <TextInput
             value={q}
             onChangeText={setQ}
             placeholder="Search categories"
-            placeholderTextColor="#71717A"
+            placeholderTextColor="#5F6B62"
             className="flex-1 bg-transparent text-sm"
           />
         </View>
@@ -30,7 +31,7 @@ export default function Categories() {
             return (
               <Link key={c.slug} href={`/service/${c.slug}`} asChild>
                 <Pressable className="mb-3 w-[31%] flex-col items-center gap-2 rounded-2xl bg-card px-2 py-5">
-                  <Icon size={24} color="#208AEF" />
+                  <IconCircle icon={Icon} size={20} circle={44} />
                   <Text className="text-center text-xs font-medium">{c.name}</Text>
                 </Pressable>
               </Link>

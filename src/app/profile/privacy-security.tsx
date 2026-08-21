@@ -5,6 +5,7 @@ import type { LucideIcon } from 'lucide-react-native';
 import { useState } from 'react';
 import { Pressable, Switch, Text, View } from 'react-native';
 
+import { IconCircle } from '@/components/handyhub/icon-circle';
 import { ScreenHeader } from '@/components/handyhub/screen-header';
 
 type Row = { icon: LucideIcon; label: string; to: Href };
@@ -25,27 +26,27 @@ export default function PrivacySecurity() {
           {rows.map(({ icon: Icon, label, to }) => (
             <Link key={label} href={to} asChild>
               <Pressable className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-                <Icon size={16} color="#208AEF" />
+                <IconCircle icon={Icon} />
                 <Text className="flex-1 text-sm font-medium">{label}</Text>
-                <ChevronRight size={16} color="#71717A" />
+                <ChevronRight size={16} color="#5F6B62" />
               </Pressable>
             </Link>
           ))}
           <View className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-            <Fingerprint size={16} color="#208AEF" />
+            <IconCircle icon={Fingerprint} />
             <Text className="flex-1 text-sm font-medium">Biometric lock</Text>
             <Switch
               value={biometric}
               onValueChange={setBiometric}
-              trackColor={{ true: '#208AEF', false: '#E4E4E7' }}
+              trackColor={{ true: '#1B3B2E', false: '#DDDDD2' }}
               thumbColor="#FFFFFF"
             />
           </View>
           <Link href="/notifications" asChild>
             <Pressable className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-              <Bell size={16} color="#208AEF" />
+              <IconCircle icon={Bell} />
               <Text className="flex-1 text-sm font-medium">Notification preferences</Text>
-              <ChevronRight size={16} color="#71717A" />
+              <ChevronRight size={16} color="#5F6B62" />
             </Pressable>
           </Link>
         </View>

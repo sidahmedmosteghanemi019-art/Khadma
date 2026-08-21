@@ -51,3 +51,15 @@ export type DbNotification = {
   created_at: string;
 };
 
+export type JobRequestRow = {
+  id: string;
+  client_id: string;
+  category: string;
+  description: string;
+  preferred_date: string;
+  preferred_time: string;
+  budget: string;
+  status: 'requested' | 'ongoing' | 'completed';
+  created_at: string;
+};
+

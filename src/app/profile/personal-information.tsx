@@ -1,7 +1,8 @@
 import { useRouter } from 'expo-router';
 import { ChevronDown, Lock, Mail, MapPin, Phone, User, Wrench } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
-import { Alert, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { showAlert } from '@/lib/alert';
 
 import { ScreenHeader } from '@/components/handyhub/screen-header';
 import { categories } from '@/lib/handyhub-data';
@@ -34,12 +35,12 @@ export default function PersonalInformation() {
 
   const save = async () => {
     if (!name.trim() || !email.trim() || !phone.trim()) {
-      Alert.alert('Missing details', 'Please fill in every field.');
+      showAlert('Missing details', 'Please fill in every field.');
       return;
     }
     const prev = (await getSession()) ?? ({} as Session);
     await saveSession({ ...prev, name: name.trim(), email: email.trim(), phone: phone.trim(), location: location.trim(), specialty });
-    Alert.alert('Saved', 'Your details have been updated.', [
+    showAlert('Saved', 'Your details have been updated.', [
       { text: 'OK', onPress: () => router.back() },
     ]);
   };
@@ -50,47 +51,47 @@ export default function PersonalInformation() {
       <ScrollView className="flex-1 px-7 pb-10">
         <View className="mt-4 space-y-3">
           <View className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-            <User size={16} color="#71717A" />
+            <User size={16} color="#5F6B62" />
             <TextInput
               value={name}
               onChangeText={setName}
               autoComplete="name"
               placeholder="Full name"
-              placeholderTextColor="#71717A"
+              placeholderTextColor="#5F6B62"
               className="flex-1 bg-transparent text-sm"
             />
           </View>
           <View className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-            <Mail size={16} color="#71717A" />
+            <Mail size={16} color="#5F6B62" />
             <TextInput
               value={email}
               onChangeText={setEmail}
               keyboardType="email-address"
               autoComplete="email"
               placeholder="Email address"
-              placeholderTextColor="#71717A"
+              placeholderTextColor="#5F6B62"
               className="flex-1 bg-transparent text-sm"
             />
           </View>
           <View className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-            <Phone size={16} color="#71717A" />
+            <Phone size={16} color="#5F6B62" />
             <TextInput
               value={phone}
               onChangeText={setPhone}
               keyboardType="phone-pad"
               autoComplete="tel"
               placeholder="Phone number"
-              placeholderTextColor="#71717A"
+              placeholderTextColor="#5F6B62"
               className="flex-1 bg-transparent text-sm"
             />
           </View>
           <View className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-            <MapPin size={16} color="#71717A" />
+            <MapPin size={16} color="#5F6B62" />
             <TextInput
               value={location}
               onChangeText={setLocation}
               placeholder="Suburb / area"
-              placeholderTextColor="#71717A"
+              placeholderTextColor="#5F6B62"
               className="flex-1 bg-transparent text-sm"
             />
           </View>
@@ -99,7 +100,7 @@ export default function PersonalInformation() {
               <Pressable
                 onPress={() => setSpecialtyOpen((o) => !o)}
                 className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-                <Wrench size={16} color="#71717A" />
+                <Wrench size={16} color="#5F6B62" />
                 <Text
                   className={cn(
                     'flex-1 text-sm',
@@ -107,7 +108,7 @@ export default function PersonalInformation() {
                   )}>
                   {selectedSpecialty?.name || 'What do you specialise in?'}
                 </Text>
-                <ChevronDown size={16} color="#71717A" />
+                <ChevronDown size={16} color="#5F6B62" />
               </Pressable>
               {specialtyOpen ? (
                 <View className="mt-1 overflow-hidden rounded-xl bg-card">
@@ -132,7 +133,7 @@ export default function PersonalInformation() {
             </View>
           ) : null}
           <View className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-            <Lock size={16} color="#71717A" />
+            <Lock size={16} color="#5F6B62" />
             <Text className="flex-1 text-sm text-muted-foreground">Password</Text>
             <Pressable onPress={() => router.push('/forgot-password')}>
               <Text className="text-sm font-medium text-primary">Change</Text>

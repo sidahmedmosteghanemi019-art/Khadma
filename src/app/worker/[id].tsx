@@ -39,7 +39,7 @@ export default function WorkerProfile() {
   if (loading) {
     return (
       <View className="flex-1 items-center justify-center bg-background">
-        <ActivityIndicator color="#208AEF" />
+        <ActivityIndicator color="#1B3B2E" />
       </View>
     );
   }
@@ -67,16 +67,16 @@ export default function WorkerProfile() {
           <View className="mt-6 space-y-2 rounded-2xl bg-card p-4">
             {profile.location ? (
               <View className="flex-row items-center gap-2">
-                <MapPin size={16} color="#208AEF" />
+                <MapPin size={16} color="#1B3B2E" />
                 <Text className="text-sm">{profile.location}</Text>
               </View>
             ) : null}
             <View className="flex-row items-center gap-2">
-              <Clock size={16} color="#208AEF" />
+              <Clock size={16} color="#1B3B2E" />
               <Text className="text-sm">Responds within 1 hour</Text>
             </View>
             <View className="flex-row items-center gap-2">
-              <BadgeCheck size={16} color="#208AEF" />
+              <BadgeCheck size={16} color="#1B3B2E" />
               <Text className="text-sm">ID verified</Text>
             </View>
           </View>
@@ -89,8 +89,8 @@ export default function WorkerProfile() {
 
         <View className="flex-row gap-3 bg-background/95 px-5 pb-8 pt-3">
           <Link href={`/chat/${profile.id}`} asChild>
-            <Pressable className="h-12 w-12 items-center justify-center rounded-xl bg-card">
-              <MessageCircle size={20} color="#208AEF" />
+            <Pressable className="h-12 w-12 items-center justify-center rounded-full bg-brand-forest">
+              <MessageCircle size={20} color="#8CB84A" />
             </Pressable>
           </Link>
           <Link href="/request" asChild>
@@ -123,7 +123,7 @@ export default function WorkerProfile() {
           </View>
           <View className="mt-3 flex-row items-center gap-1.5">
             <Text className="text-xl font-bold">{worker.name}</Text>
-            {worker.verified && <BadgeCheck size={20} color="#208AEF" />}
+            {worker.verified && <BadgeCheck size={20} color="#1B3B2E" />}
           </View>
           <Text className="text-sm text-muted-foreground">{worker.trade}</Text>
           <Link href={`/reviews/${worker.id}`} asChild>
@@ -137,15 +137,15 @@ export default function WorkerProfile() {
 
         <View className="mt-6 space-y-2 rounded-2xl bg-card p-4">
           <View className="flex-row items-center gap-2">
-            <MapPin size={16} color="#208AEF" />
+            <MapPin size={16} color="#1B3B2E" />
             <Text className="text-sm">{worker.distance}</Text>
           </View>
           <View className="flex-row items-center gap-2">
-            <Clock size={16} color="#208AEF" />
+            <Clock size={16} color="#1B3B2E" />
             <Text className="text-sm">Responds within 1 hour</Text>
           </View>
           <View className="flex-row items-center gap-2">
-            <BadgeCheck size={16} color="#208AEF" />
+            <BadgeCheck size={16} color="#1B3B2E" />
             <Text className="text-sm">ID verified {'\u00B7'} {worker.rate}</Text>
           </View>
         </View>
@@ -167,8 +167,8 @@ export default function WorkerProfile() {
 
       <View className="flex-row gap-3 bg-background/95 px-5 pb-8 pt-3">
         <Link href={`/chat/${worker.id}`} asChild>
-          <Pressable className="h-12 w-12 items-center justify-center rounded-xl bg-card">
-            <MessageCircle size={20} color="#208AEF" />
+          <Pressable className="h-12 w-12 items-center justify-center rounded-full bg-brand-forest">
+            <MessageCircle size={20} color="#8CB84A" />
           </Pressable>
         </Link>
         <Link href="/request" asChild>

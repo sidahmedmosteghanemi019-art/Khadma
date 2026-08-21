@@ -3,6 +3,7 @@ import { Bell, MessageCircle } from 'lucide-react-native';
 import { useCallback, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
 
+import { IconCircle } from '@/components/handyhub/icon-circle';
 import { ScreenHeader } from '@/components/handyhub/screen-header';
 import type { DbNotification } from '@/lib/supabase';
 import { supabase } from '@/lib/supabase';
@@ -47,13 +48,11 @@ export default function Notifications() {
       <View className="flex-1 px-5">
         {!loaded ? (
           <View className="flex-1 items-center justify-center">
-            <ActivityIndicator color="#208AEF" />
+            <ActivityIndicator color="#1B3B2E" />
           </View>
         ) : items.length === 0 ? (
           <View className="flex-1 items-center justify-center">
-            <View className="h-16 w-16 items-center justify-center rounded-2xl bg-card">
-              <Bell size={28} color="#71717A" />
-            </View>
+            <IconCircle icon={Bell} size={26} circle={64} />
             <Text className="mt-4 text-sm text-muted-foreground">
               No notifications yet.
             </Text>
@@ -66,17 +65,12 @@ export default function Notifications() {
                 'flex flex-row items-start gap-3 py-4',
                 i < items.length - 1 && 'border-b border-border',
               )}>
-              <View
-                className={cn(
-                  'h-10 w-10 shrink-0 items-center justify-center rounded-full',
-                  n.read ? 'bg-card' : 'bg-primary',
-                )}>
-                {n.title.toLowerCase().includes('message') ? (
-                  <MessageCircle size={16} color={n.read ? '#208AEF' : '#FFFFFF'} />
-                ) : (
-                  <Bell size={16} color={n.read ? '#208AEF' : '#FFFFFF'} />
-                )}
-              </View>
+              <IconCircle
+                icon={n.title.toLowerCase().includes('message') ? MessageCircle : Bell}
+                size={16}
+                circle={40}
+                className={cn('shrink-0', n.read && 'opacity-40')}
+              />
               <View className="flex-1">
                 <Text className="text-sm font-semibold">{n.title}</Text>
                 <Text className="text-xs text-muted-foreground">{n.body}</Text>

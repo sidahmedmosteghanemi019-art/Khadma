@@ -43,13 +43,13 @@ export default function NewChat() {
       <ScreenHeader title="New chat" back="/messages" />
       <ScrollView className="flex-1 px-5 pb-8">
         <View className="mb-2 flex-row items-center gap-2 pt-2">
-          <MessageSquarePlus size={16} color="#208AEF" />
+          <MessageSquarePlus size={16} color="#1B3B2E" />
           <Text className="text-xs text-muted-foreground">
             Pick a worker to start a fresh conversation.
           </Text>
         </View>
         {loading ? (
-          <ActivityIndicator className="mt-10" color="#208AEF" />
+          <ActivityIndicator className="mt-10" color="#1B3B2E" />
         ) : (
           workers.map((w, i) => (
             <Pressable

@@ -18,7 +18,7 @@ export default function ConfirmCode() {
             keyboardType="number-pad"
             maxLength={6}
             placeholder="000000"
-            placeholderTextColor="#71717A"
+            placeholderTextColor="#5F6B62"
             className="w-full rounded-xl bg-card px-4 py-3.5 text-center text-lg tracking-[8]"
           />
         </View>

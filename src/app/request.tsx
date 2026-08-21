@@ -1,19 +1,51 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Camera } from 'lucide-react-native';
-import { Alert, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { showAlert } from '@/lib/alert';
 
 import { ScreenHeader } from '@/components/handyhub/screen-header';
 import { categories } from '@/lib/handyhub-data';
+import { supabase } from '@/lib/supabase';
 import { cn } from '@/lib/utils';
 
 export default function RequestService() {
   const router = useRouter();
   const [service, setService] = useState<string>('');
   const [photos, setPhotos] = useState(0);
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [budget, setBudget] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const submit = () => {
-    Alert.alert('Service requested successfully!');
+  const submit = async () => {
+    if (!service) {
+      showAlert('Pick a service', 'Choose what you need help with.');
+      return;
+    }
+    setSubmitting(true);
+    const me = (await supabase.auth.getUser()).data.user?.id;
+    if (!me) {
+      setSubmitting(false);
+      showAlert('Not signed in', 'Please log in to request a service.');
+      router.push('/login');
+      return;
+    }
+    const { error } = await supabase.from('job_requests').insert({
+      client_id: me,
+      category: service,
+      description: description.trim(),
+      preferred_date: date.trim(),
+      preferred_time: time.trim(),
+      budget: budget.trim(),
+    });
+    setSubmitting(false);
+    if (error) {
+      showAlert('Request failed', error.message);
+      return;
+    }
+    showAlert('Service requested!', 'Find it under the Requested tab in Jobs.');
     router.push('/jobs');
   };
 
@@ -48,8 +80,10 @@ export default function RequestService() {
         <TextInput
           multiline
           numberOfLines={4}
-          placeholder="Tell the worker what needs doing\u2026"
-          placeholderTextColor="#71717A"
+          value={description}
+          onChangeText={setDescription}
+          placeholder="Tell the worker what needs doing…"
+          placeholderTextColor="#5F6B62"
           textAlignVertical="top"
           className="mt-2 w-full rounded-xl bg-card px-4 py-3.5 text-sm"
           style={{ minHeight: 96 }}
@@ -59,16 +93,20 @@ export default function RequestService() {
           <View className="flex-1">
             <Text className="text-xs font-medium">Preferred date</Text>
             <TextInput
+              value={date}
+              onChangeText={setDate}
               placeholder="YYYY-MM-DD"
-              placeholderTextColor="#71717A"
+              placeholderTextColor="#5F6B62"
               className="mt-2 w-full rounded-xl bg-card px-3 py-3.5 text-sm"
             />
           </View>
           <View className="flex-1">
             <Text className="text-xs font-medium">Preferred time</Text>
             <TextInput
+              value={time}
+              onChangeText={setTime}
               placeholder="HH:MM"
-              placeholderTextColor="#71717A"
+              placeholderTextColor="#5F6B62"
               className="mt-2 w-full rounded-xl bg-card px-3 py-3.5 text-sm"
             />
           </View>
@@ -77,8 +115,10 @@ export default function RequestService() {
         <Text className="mt-4 text-xs font-medium">Budget (optional)</Text>
         <TextInput
           keyboardType="numeric"
+          value={budget}
+          onChangeText={setBudget}
           placeholder="R 500"
-          placeholderTextColor="#71717A"
+          placeholderTextColor="#5F6B62"
           className="mt-2 w-full rounded-xl bg-card px-4 py-3.5 text-sm"
         />
 
@@ -86,14 +126,19 @@ export default function RequestService() {
         <Pressable
           onPress={() => setPhotos((p) => p + 1)}
           className="mt-2 flex-col items-center gap-1 rounded-xl border border-dashed border-border bg-card py-6">
-          <Camera size={24} color="#71717A" />
+          <Camera size={24} color="#5F6B62" />
           <Text className="text-xs text-muted-foreground">
             {photos > 0 ? `${photos} photo${photos > 1 ? 's' : ''} added` : 'Add photo'}
           </Text>
         </Pressable>
 
-        <Pressable onPress={submit} className="mt-7 w-full rounded-xl bg-primary px-6 py-3.5">
-          <Text className="text-center text-sm font-semibold text-primary-foreground">Next</Text>
+        <Pressable
+          onPress={submit}
+          disabled={submitting}
+          className="mt-7 w-full rounded-xl bg-primary px-6 py-3.5 disabled:opacity-60">
+          <Text className="text-center text-sm font-semibold text-primary-foreground">
+            {submitting ? 'Sending request…' : 'Next'}
+          </Text>
         </Pressable>
       </ScrollView>
     </View>

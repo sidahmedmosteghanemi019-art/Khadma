@@ -20,7 +20,7 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "output": "static",
+      "output": "single",
       "bundler": "metro",
       "favicon": "./assets/images/favicon.png"
     },
@@ -29,7 +29,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#1B3B2E",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }

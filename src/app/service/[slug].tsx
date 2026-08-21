@@ -61,7 +61,7 @@ export default function ServiceDetail() {
         <View className="mt-5 space-y-2">
           {perks.map((p) => (
             <View key={p} className="flex-row items-center gap-2">
-              <CheckCircle2 size={16} color="#208AEF" />
+              <CheckCircle2 size={16} color="#1B3B2E" />
               <Text className="text-sm">{p}</Text>
             </View>
           ))}
@@ -71,7 +71,7 @@ export default function ServiceDetail() {
         </Text>
         <View className="mt-3 space-y-3">
           {loading ? (
-            <ActivityIndicator className="mt-4" color="#208AEF" />
+            <ActivityIndicator className="mt-4" color="#1B3B2E" />
           ) : (
             workers.map((w) => (
               <Link key={w.id} href={`/worker/${w.id}`} asChild>

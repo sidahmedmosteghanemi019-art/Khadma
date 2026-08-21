@@ -1,7 +1,8 @@
 import { Link, useRouter } from "expo-router";
 import { Lock, Mail } from "lucide-react-native";
 import { useState } from "react";
-import { Alert, Pressable, Text, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View } from "react-native";
+import { showAlert } from "@/lib/alert";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { saveSession } from "@/lib/store";
@@ -16,7 +17,7 @@ export default function Login() {
 
   const login = async () => {
     if (!email.trim() || !password) {
-      Alert.alert("Missing details", "Enter your email and password.");
+      showAlert("Missing details", "Enter your email and password.");
       return;
     }
     setSubmitting(true);
@@ -26,7 +27,7 @@ export default function Login() {
     });
     setSubmitting(false);
     if (error) {
-      Alert.alert("Log in failed", error.message);
+      showAlert("Log in failed", error.message);
       return;
     }
     const user = data.user;
@@ -56,26 +57,26 @@ export default function Login() {
 
       <View className="mt-7 space-y-3">
         <View className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-          <Mail size={16} color="#71717A" />
+          <Mail size={16} color="#5F6B62" />
           <TextInput
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
             autoComplete="email"
             placeholder="Email or phone"
-            placeholderTextColor="#71717A"
+            placeholderTextColor="#5F6B62"
             className="flex-1 bg-transparent text-sm"
           />
         </View>
         <View className="flex-row items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-          <Lock size={16} color="#71717A" />
+          <Lock size={16} color="#5F6B62" />
           <TextInput
             value={password}
             onChangeText={setPassword}
             secureTextEntry
             autoComplete="password"
             placeholder="Password"
-            placeholderTextColor="#71717A"
+            placeholderTextColor="#5F6B62"
             className="flex-1 bg-transparent text-sm"
           />
         </View>
